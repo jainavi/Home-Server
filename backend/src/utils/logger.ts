@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
+// TODO: Add log rotation
+
 const logFilePath = path.join(__dirname, '../../logs/app.log');
 const errorFilePath = path.join(__dirname, '../../logs/error.log');
 
@@ -19,7 +21,7 @@ const formatLogMessage = (type: string, message: string, payload?: any) => {
   return `${getCurrentDateTime()} | ${type} | ${message}${formatLogMessage}`;
 };
 
-const formatErrorMessage = (error: Error, payload?: any) => {
+const formatErrorMessage = (error: Error, payload?: any) => { 
   const stackTrace = error.stack ? `\nStack Trace: ${error.stack}` : '';
   const formattedPayload = payload
     ? `\nPayload: ${JSON.stringify(payload, null, 2)}`
@@ -48,4 +50,9 @@ const error = (error: Error, payload?: any) => {
   }
 };
 
-export default { log, error };
+const cleanup = () => {
+  fileLogStream.end();
+  errorLogStream.end();
+}
+
+export default { log, error, cleanup };
