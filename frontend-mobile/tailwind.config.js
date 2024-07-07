@@ -6,7 +6,10 @@ module.exports = {
       colors: {
         wht: "#ffffff",
         blk: "#09090b",
-        gry: '#262628',
+        gry: {
+          DEFAULT: "#262628",
+          light: "#a0a2a7",
+        },
       },
       fontFamily: {
         jbm: ["JetBrainsMono-Regular", "monospace"],
@@ -14,9 +17,9 @@ module.exports = {
         jbmbold: ["JetBrainsMono-Bold", "monospace"],
         jbmbolditalic: ["JetBrainsMono-BoldItalic", "monospace"],
         jbmlight: ["JetBrainsMono-ExtraLight", "monospace"],
-        jbllightitalic: ["JetBrainsMono-ExtraLightItalic", "monospace"], 
+        jbllightitalic: ["JetBrainsMono-ExtraLightItalic", "monospace"],
         trmnl: ["VT323-Regular", "monospace"],
-      }
+      },
     },
   },
   plugins: [],

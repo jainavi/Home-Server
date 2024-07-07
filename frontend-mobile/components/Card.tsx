@@ -2,10 +2,11 @@ import { View } from "react-native";
 
 interface Iprop {
   children: React.ReactNode;
+  customStyles: string;
 }
 
-export default ({ children }: Iprop) => {
-  // card in shadcn style
-
-  return <View className="bg-gry rounded-md">{children}</View>;
+export default ({ children, customStyles }: Iprop) => {
+  return (
+    <View className={`flex border-2 border-gry rounded-lg p-4 ${customStyles}`}>{children}</View>
+  );
 };

@@ -4,10 +4,10 @@ import { styled } from "nativewind";
 
 interface IProps {
   blink?: boolean;
-  customStyle: string;
+  customStyles: string;
 }
 
-export default ({ blink, customStyle }: IProps) => {
+export default ({ blink, customStyles }: IProps) => {
   const opacity = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -19,13 +19,13 @@ export default ({ blink, customStyle }: IProps) => {
         Animated.timing(opacity, {
           toValue: 0,
           duration: trnsTm,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.delay(delay),
         Animated.timing(opacity, {
           toValue: 1,
           duration: trnsTm,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.delay(delay),
       ])
@@ -38,5 +38,5 @@ export default ({ blink, customStyle }: IProps) => {
 
   const StyledView = styled(Animated.View);
 
-  return <StyledView className={customStyle} style={{ opacity }} />;
+  return <StyledView className={customStyles} style={{ opacity }} />;
 };
