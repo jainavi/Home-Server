@@ -9,6 +9,7 @@ module.exports = {
         gry: {
           DEFAULT: "#262628",
           light: "#a0a2a7",
+          dark: "#141414",
         },
       },
       fontFamily: {

@@ -59,13 +59,7 @@ export default () => {
     }
   }, [progress]);
 
-  useEffect(() => {
-    (async () => {
-      const name = await AsyncStorage.getItem("name");
-      if (name) router.replace("/home");
-    })();
-  }, []);
-
+  // TODO: Refactor this component, use CW instead of this
   return (
     <SafeAreaView className="bg-blk h-full p-4 justify-between">
       {/* localhost text */}

@@ -1,7 +1,9 @@
 import { useEffect } from "react";
-import { SplashScreen, Stack } from "expo-router";
+import { SplashScreen, Stack, router } from "expo-router";
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ArrowLeft } from "lucide-react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -17,15 +19,48 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if (error) throw error;
-    if (fontsLoaded) SplashScreen.hideAsync();
+    (async () => {
+      if (error) throw error;
+      const name = await AsyncStorage.getItem("name");
+      // TODO: This may be buggy, check if it works as expected in production
+      if (fontsLoaded) {
+        SplashScreen.hideAsync();
+        if (name) router.replace("/home");
+      }
+    })();
   }, [fontsLoaded, error]);
 
   if (!fontsLoaded) return null;
 
   return (
     <>
-      <Stack screenOptions={{ headerShown: false }} />
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#09090b",
+          },
+          headerTitleStyle: {
+            fontFamily: "VT323-Regular",
+            color: "white",
+            fontSize: 36,
+          },
+        }}
+      >
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="home/print"
+          options={{
+            headerTitle: "///:Print",
+            headerLeft: () => (
+              <ArrowLeft
+                className="text-wht self-center mr-2"
+                onPress={() => router.back()}
+              />
+            ),
+          }}
+        />
+      </Stack>
       <StatusBar style="light" />
     </>
   );
