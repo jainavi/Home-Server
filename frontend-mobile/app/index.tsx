@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, View } from "react-native";
 import { ArrowRight, ChevronRight, ArrowLeft } from "lucide-react-native";
@@ -9,7 +10,7 @@ import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Cursor from "@/components/Cursor";
 import Input from "@/components/Input";
-import { router } from "expo-router";
+import Dropdown from "@/components/Dropdown";
 
 const LoadingDots = ({ setLoading }: { setLoading: (arg: boolean) => any }) => {
   const [dotsCount, setDotsCount] = useState(0);
@@ -122,13 +123,12 @@ export default () => {
               />
             )}
             {progress > 0 && (
-              <Input
-                placeholder="Enter your gender"
-                customStyles="w-full h-12 font-jbm"
-                placeholderTextColor="#a0a2a7"
+              <Dropdown
+                customStyles="bg-blk justify-between"
+                modalCustomStyles="bg-gry-dark"
+                options={["Male", "Female"]}
+                onSelect={setGender}
                 value={gender}
-                onChangeText={setGender}
-                editable={!loading}
               />
             )}
             <View className="flex-row">

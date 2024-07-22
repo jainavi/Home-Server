@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useFocusEffect, router } from "expo-router";
 import { Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import Button from "@/components/Button";
 import Card from "@/components/Card";
@@ -41,11 +40,6 @@ export default () => {
       );
     }, [])
   );
-
-  // DEV: Remove the useEffect below after the development of the print command
-  useEffect(() => {
-    router.navigate("/home/print");
-  }, []);
 
   return (
     <View className="bg-blk h-full p-4 pt-4">

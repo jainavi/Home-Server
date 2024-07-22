@@ -5,6 +5,8 @@ import { StatusBar } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ArrowLeft } from "lucide-react-native";
 
+import { SocketProvider } from "@/context/SocketContext";
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -33,7 +35,7 @@ export default function RootLayout() {
   if (!fontsLoaded) return null;
 
   return (
-    <>
+    <SocketProvider>
       <Stack
         screenOptions={{
           headerStyle: {
@@ -62,6 +64,6 @@ export default function RootLayout() {
         />
       </Stack>
       <StatusBar style="light" />
-    </>
+    </SocketProvider>
   );
 }

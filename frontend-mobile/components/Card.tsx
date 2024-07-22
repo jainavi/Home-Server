@@ -2,7 +2,7 @@ import { View } from "react-native";
 
 interface Iprop {
   children: React.ReactNode;
-  customStyles: string;
+  customStyles?: string;
   dashed?: boolean;
 }
 

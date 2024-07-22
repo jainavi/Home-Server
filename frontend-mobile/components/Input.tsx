@@ -1,11 +1,11 @@
 import { TextInput } from "react-native";
 
 interface IProp {
-  placeholder: string;
-  customStyles: string;
-  placeholderTextColor: string;
-  value: string;
+  customStyles: string
+  value?: string;
+  placeholder?: string;
   editable?: boolean;
+  placeholderTextColor?: string;
   onChangeText?: (text: string) => void;
 }
 
