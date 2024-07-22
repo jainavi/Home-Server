@@ -10,4 +10,15 @@ const HttpStatusCode = {
   503: 'Service Unavailable',
 } as const;
 
-export { HttpStatusCode };
+const PrintQuality = {
+  draft: 3,
+  normal: 4,
+  best: 5,
+} as const;
+
+const SocketEvents = {
+  connect: 'connect',
+  printJobStatus: 'printJobStatus',
+} as const;
+
+export { HttpStatusCode, PrintQuality, SocketEvents };

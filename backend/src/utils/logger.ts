@@ -11,14 +11,14 @@ const errorLogStream = fs.createWriteStream(errorFilePath, { flags: 'a' });
 
 const getCurrentDateTime = () => {
   const now = new Date();
-  return `${now.toISOString().slice(0, 10)} ${now.toTimeString().slice(0, 10)}`;
+  return `${now.toISOString().slice(0, 10)} ${now.toLocaleTimeString().slice(0, 10)}`;
 };
 
 const formatLogMessage = (type: string, message: string, payload?: any) => {
   const formattedPayload = payload
     ? `\nPayload: ${JSON.stringify(payload, null, 2)}`
     : '';
-  return `${getCurrentDateTime()} | ${type} | ${message}${formatLogMessage}`;
+  return `${getCurrentDateTime()} | ${type} | ${message}${formattedPayload}`;
 };
 
 const formatErrorMessage = (error: Error, payload?: any) => { 

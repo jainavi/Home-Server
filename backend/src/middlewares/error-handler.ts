@@ -1,9 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express';
-import AppError from '../utils/app-error';
+import { AppError } from '../utils/errors';
 import logger from '../utils/logger';
 import { HttpStatusCode } from '../utils/enums';
 
-const errorHandler =  (
+const errorHandler = (
   err: AppError | Error,
   req: Request,
   res: Response,
@@ -14,9 +14,10 @@ const errorHandler =  (
     httpCode = 500,
     status = 'Internal Server Error',
     isOperational = false,
+    payload = undefined,
   } = err instanceof AppError ? err : {};
 
-  logger.error(err);
+  logger.error(err, payload);
 
   if (process.env.NODE_ENV === 'production') {
     if (!isOperational) {
@@ -29,6 +30,7 @@ const errorHandler =  (
     return res.status(httpCode).json({
       message,
       status,
+      payload, // Contains any additional Error data
     });
   }
 
@@ -37,6 +39,7 @@ const errorHandler =  (
     status,
     stack,
     err,
+    payload,
   });
 };
 
