@@ -8,8 +8,10 @@ const getSocket = () =>
 
 const SocketContext = createContext<{
   socket: ReturnType<typeof socketio> | null;
+  connectionState: "connecting" | "connected" | "disconnected" | "failed";
 }>({
   socket: null,
+  connectionState: "connecting",
 });
 
 const useSocket = () => useContext(SocketContext);
@@ -20,13 +22,30 @@ const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
   const [socket, setSocket] = useState<ReturnType<typeof socketio> | null>(
     null
   );
+  const [connectionState, setConnectionState] = useState<
+    "connecting" | "connected" | "disconnected" | "failed"
+  >("connecting");
 
   useEffect(() => {
-    setSocket(getSocket());
+    const newSocket = getSocket();
+
+    newSocket.on("connect", () => {
+      setConnectionState("connected");
+    });
+
+    newSocket.on("disconnect", () => {
+      setConnectionState("disconnected");
+    });
+
+    newSocket.on("connect_error", () => {
+      setConnectionState("failed");
+    });
+
+    setSocket(newSocket);
   }, []);
 
   return (
-    <SocketContext.Provider value={{ socket }}>
+    <SocketContext.Provider value={{ socket, connectionState }}>
       {children}
     </SocketContext.Provider>
   );
