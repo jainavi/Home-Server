@@ -8,6 +8,7 @@ import errorHandler from './middlewares/error-handler';
 // import getToken from './middlewares/get-token';
 
 import printRouter from './routes/printer.route';
+import powerRouter from './routes/power.route';
 
 const app = express();
 
@@ -22,7 +23,7 @@ const io = new Server(httpServer, {
 });
 
 /* Middlewares */
-app.set("io", io);
+app.set('io', io);
 app.use(
   cors({
     origin: ['*'], // TODO: Change this to the frontend URL
@@ -34,6 +35,7 @@ app.use(express.json());
 
 /* Routes */
 app.use('/print', printRouter);
+app.use('/power', powerRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`));
