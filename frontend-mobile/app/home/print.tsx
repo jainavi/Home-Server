@@ -255,8 +255,8 @@ export default () => {
       {/* Print Button */}
       {activeIndex === null && documents.length > 0 && (
         <Button
-          customStyles={`absolute bottom-${
-            currentPrintJobs.length > 0 ? "24" : "10"
+          customStyles={`absolute ${
+            currentPrintJobs.length > 0 ? "bottom-[96px]" : "bottom-10"
           } left-[10%] right-[10%] h-12 bg-wht`}
           onPress={() => handlePrint()}
         >
@@ -272,6 +272,7 @@ export default () => {
           <Button
             customStyles="w-30 h-12 border-gry border-2"
             onPress={() => {
+              setCurrentPrintJobs([]);
               fetch(`${process.env.EXPO_PUBLIC_SERVER_BASE_URL}/print/cancel`, {
                 method: "POST",
                 headers: {
