@@ -16,7 +16,8 @@ const printValidationRules = () => [
   query('toLandScape')
     .optional()
     .isBoolean()
-    .withMessage('toLandScape must be a boolean'),
+    .withMessage('toLandScape must be a boolean')
+    .toBoolean(),
   query('pages')
     .optional()
     .isString()

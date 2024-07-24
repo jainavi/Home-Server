@@ -13,7 +13,10 @@ export const print = asyncHandler(
         path.join(__dirname, `../../${req.file?.path}`),
         req.query
       );
-      logger.log(cmdRes.stdout, req.file);
+      logger.log(cmdRes.stdout, [
+        `File: ${JSON.stringify(req.file)}`,
+        `Query Obj: ${JSON.stringify(req.query)}`,
+      ]);
     } catch (error) {
       throw new AppError('Failed to print the document', 500);
     }

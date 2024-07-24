@@ -18,10 +18,10 @@ const formatLogMessage = (type: string, message: string, payload?: any) => {
   const formattedPayload = payload
     ? `\nPayload: ${JSON.stringify(payload, null, 2)}`
     : '';
-  return `${getCurrentDateTime()} | ${type} | ${message}${formattedPayload}`;
+  return `${getCurrentDateTime()} | ${type} | ${message}${formattedPayload}\n`;
 };
 
-const formatErrorMessage = (error: Error, payload?: any) => { 
+const formatErrorMessage = (error: Error, payload?: any) => {
   const stackTrace = error.stack ? `\nStack Trace: ${error.stack}` : '';
   const formattedPayload = payload
     ? `\nPayload: ${JSON.stringify(payload, null, 2)}`
@@ -53,6 +53,6 @@ const error = (error: Error, payload?: any) => {
 const cleanup = () => {
   fileLogStream.end();
   errorLogStream.end();
-}
+};
 
 export default { log, error, cleanup };

@@ -17,9 +17,9 @@ const PORT = process.env.PORT || 3000;
 let printJobInterval: NodeJS.Timeout;
 
 const emitPrintJobsStatus = async () => {
-  logger.log('Getting print jobs status...');
+  // logger.log('Getting print jobs status...');
   const printJobs = await showCurrentJobs();
-  logger.log('Pending print jobs', printJobs);
+  // logger.log('Pending print jobs', printJobs);
 
   io.emit(SocketEvents.printJobStatus, printJobs);
 };
