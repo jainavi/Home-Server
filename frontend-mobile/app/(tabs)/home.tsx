@@ -37,8 +37,8 @@ export default () => {
 
   useFocusEffect(
     useCallback(() => {
-      settClock((prev) => prev + 1);
       if (connectionState === "connected") {
+        settClock((prev) => prev + 2);
         addCWElement(
           <CW.Text customStyles="text-wht text-xl">
             &gt; Connected to the Server
@@ -52,6 +52,7 @@ export default () => {
           />
         );
       } else if (connectionState === "failed") {
+        settClock((prev) => prev + 1);
         addCWElement(
           <CW.LoadingDots
             text="> Connecting to the server"
